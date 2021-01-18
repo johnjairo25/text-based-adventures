@@ -1,5 +1,6 @@
 package web;
 
+import com.twilio.twiml.MessagingResponse;
 import com.twilio.twiml.messaging.Body;
 import com.twilio.twiml.messaging.Message;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +15,18 @@ public class SmsController {
 
     @RequestMapping(value = "/test",
             method = {RequestMethod.GET, RequestMethod.POST},
-            produces = "text/xml")
+            produces = "application/xml")
     public String test() {
-        Message message = new Message.Builder()
-                .body(new Body.Builder(WELCOME_MESSAGE).build())
+        return buildResponseMessage(WELCOME_MESSAGE);
+    }
+
+    private String buildResponseMessage(String message) {
+        MessagingResponse response = new MessagingResponse.Builder()
+                .message(new Message.Builder()
+                        .body(new Body.Builder(message).build())
+                        .build())
                 .build();
-        return message.toXml();
+        return response.toXml();
     }
 
 }
