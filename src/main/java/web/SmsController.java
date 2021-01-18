@@ -14,7 +14,7 @@ public class SmsController {
 
     @RequestMapping(value = "/test",
             method = {RequestMethod.GET, RequestMethod.POST},
-            produces = "application/xml")
+            produces = "text/xml")
     public String test() {
         Message message = new Message.Builder()
                 .body(new Body.Builder(WELCOME_MESSAGE).build())
