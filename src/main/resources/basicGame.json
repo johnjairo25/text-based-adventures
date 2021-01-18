@@ -1,0 +1,139 @@
+{
+  "currentLocation": "initial",
+  "locations": [
+    {
+      "name": "initial",
+      "message": "You are in the initial position of text based adventure land",
+      "directionToLocationMap": [
+        {
+          "direction": "north",
+          "location": "north"
+        },
+        {
+          "direction": "south",
+          "location": "south"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "Iron lock",
+          "unblocksWith": "Iron key",
+          "blockedDirections": [
+            "south"
+          ]
+        }
+      ],
+      "equipables": []
+    },
+    {
+      "name": "north",
+      "message": "You are in the cold dangerous north",
+      "directionToLocationMap": [
+        {
+          "direction": "south",
+          "location": "initial"
+        },
+        {
+          "direction": "east",
+          "location": "north east"
+        },
+        {
+          "direction": "west",
+          "location": "north west"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "north east",
+      "message": "You are in the north east, ask for directions, you may find something you need here!",
+      "directionToLocationMap": [
+        {
+          "direction": "west",
+          "location": "north"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "Iron key",
+          "description": "Iron key to unlock the Iron lock"
+        }
+      ]
+    },
+    {
+      "name": "north west",
+      "message": "You are in the north west, ask for directions, you may find something you need here!",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "north"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "Infinity sword",
+          "description": "Infinity sword to kill animals that block your way"
+        }
+      ]
+    },
+    {
+      "name": "south",
+      "message": "You are on the peaceful south, but be careful if you keep going south, animals are fierce down there",
+      "directionToLocationMap": [
+        {
+          "direction": "north",
+          "location": "initial"
+        },
+        {
+          "direction": "south",
+          "location": "tiger house"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "tiger house",
+      "message": "You are in the tiger house, use your weapon before you can continue. Ask for directions if needed",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "winning"
+        },
+        {
+          "direction": "west",
+          "location": "losing"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "A dangerous tiger",
+          "unblocksWith": "Infinity sword",
+          "blockedDirections": [
+            "east",
+            "west"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "winning",
+      "message": "You won",
+      "type": "winning",
+      "directionToLocationMap": [],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "losing",
+      "message": "You lost",
+      "type": "losing",
+      "directionToLocationMap": [],
+      "blockers": [],
+      "equipables": []
+    }
+  ]
+}
