@@ -12,7 +12,9 @@ public class SmsController {
 
     private static final String WELCOME_MESSAGE = "Welcome to the Text Based Adventures World";
 
-    @RequestMapping(value = "/test", method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/test",
+            method = {RequestMethod.GET, RequestMethod.POST},
+            produces = "application/xml")
     public String test() {
         Message message = new Message.Builder()
                 .body(new Body.Builder(WELCOME_MESSAGE).build())
