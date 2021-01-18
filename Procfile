@@ -1,0 +1,1 @@
+web: java -jar target/text-adventures-sms-1.0-SNAPSHOT.jar
