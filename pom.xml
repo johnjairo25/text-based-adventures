@@ -22,7 +22,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>web.WebApplication</mainClass>
+                    <mainClass>web.application.WebApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

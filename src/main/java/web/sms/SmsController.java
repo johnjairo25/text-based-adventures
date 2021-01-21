@@ -1,56 +1,36 @@
-package web;
+package web.sms;
 
 import com.twilio.twiml.MessagingResponse;
 import com.twilio.twiml.messaging.Body;
 import com.twilio.twiml.messaging.Message;
-import game.ConsoleMain;
-import game.TextAdventuresGame;
-import game.builder.JsonGameBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import web.manager.CachedGameManager;
 
-import java.io.InputStream;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/sms")
 public class SmsController {
 
-//    private static final String WELCOME_MESSAGE = "Welcome to the Text Based Adventures World";
+    private final CachedGameManager gameManager;
 
-    private static TextAdventuresGame game;
-    private static boolean started = false;
-
-    static {
-        InputStream is = readBasicFile();
-        game = new JsonGameBuilder(is).build();
+    @Autowired
+    public SmsController(CachedGameManager gameManager) {
+        this.gameManager = gameManager;
     }
 
     @PostMapping(path = "/play",
             produces = "application/xml",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String play(@RequestParam Map<String, String> paramMap) {
-
-        String commandText = paramMap.get("Body");
-        if (!started || "start game".equalsIgnoreCase(commandText.trim())) {
-
-            started = true;
-            String gameResult = game.startGame();
-            return buildResponseMessage(gameResult);
-        } else {
-
-            String gameResult = game.applyCommand(commandText);
-            return buildResponseMessage(gameResult);
-        }
-    }
-
-    private static InputStream readBasicFile() {
-        return ConsoleMain.class
-                .getClassLoader()
-                .getResourceAsStream("basicGame.json");
+        SmsWebhookRequest request = SmsWebhookRequest.buildFrom(paramMap);
+        String commandResult = gameManager.applyCommand(request.getFrom(), request.getBody());
+        return buildResponseMessage(commandResult);
     }
 
     private String buildResponseMessage(String message) {

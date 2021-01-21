@@ -17,19 +17,18 @@ import java.util.stream.Collectors;
 
 public class JsonGameBuilder implements GameBuilder {
 
-    private final InputStream inputStream;
+    private final String jsonText;
 
     public JsonGameBuilder(InputStream inputStream) {
-        this.inputStream = inputStream;
+        this.jsonText = readInputText(inputStream);
     }
 
     @Override
     public TextAdventuresGame build() {
-        String text = readInputText();
-        return buildGameFromText(text);
+        return buildGameFromText(jsonText);
     }
 
-    private String readInputText() {
+    private String readInputText(InputStream inputStream) {
         return new BufferedReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                 .lines()
