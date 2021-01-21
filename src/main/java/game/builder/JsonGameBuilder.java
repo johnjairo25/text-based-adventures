@@ -158,8 +158,7 @@ public class JsonGameBuilder implements GameBuilder {
         return input == null ? "" : input
                 .trim()
                 .replaceAll("\\s+", " ")
-                .replaceAll("[^a-zA-Z0-9 ]", "")
-                .toLowerCase();
+                .replaceAll("[^a-zA-Z0-9 ]", "");
     }
 
     private Location findCurrentLocation(String initialLocation, Set<Location> locations) {

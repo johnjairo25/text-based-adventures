@@ -66,13 +66,13 @@ public class Location {
     }
 
     private String getNormalMessage() {
-        String inventory = equipables.stream()
+        String items = equipables.stream()
                 .map(Equipable::getName)
                 .collect(Collectors.joining(", "));
 
-        inventory = inventory.isEmpty() ? "" : "There is : " + inventory;
-
-        return String.format("%s\n%s\n%s", name, message, inventory).trim();
+        return items.isEmpty()
+                ? String.format("Location: %s\nMessage: %s", name, message)
+                : String.format("Location: %s\nMessage: %s\nItems: %s", name, message, items);
     }
 
     public void addEquipable(Equipable equipable) {
@@ -100,12 +100,12 @@ public class Location {
 
         String useString = equipables.stream()
                 .filter(this::canUseEquipable)
-                .map(e -> String.format("%s %s : use the equipable to unlock more options", useCommandText, e))
+                .map(e -> String.format("%s %s : Use the equipable to unlock more options", useCommandText, e))
                 .collect(Collectors.joining("\n"));
 
         String pickupString = this.equipables == null ? "" :
                 this.equipables.stream()
-                        .map(e -> String.format("%s %s : Pick up the item to use it later", pickupCommandText, e.getName()))
+                        .map(e -> String.format("%s %s : Take the item to use it later", pickupCommandText, e.getName()))
                         .collect(Collectors.joining("\n"));
 
         return String.format("%s\n%s\n%s", movementString, useString, pickupString).trim().replace("\n\n", "\n");
@@ -129,7 +129,7 @@ public class Location {
                 .filter(it -> !availableDirections.contains(it))
                 .collect(Collectors.joining(", "));
 
-        return String.format("You used the %s and now you can go to the %s", equipable, d);
+        return String.format("You used the %s and now you can go %s", equipable, d);
     }
 
     private List<String> getAvailableDirections() {

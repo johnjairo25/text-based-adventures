@@ -71,9 +71,8 @@ public class MovementsTest extends MapFixture {
         String useCommand = game.applyCommand("use " + keyName);
         String moveToBlockedDirection = game.applyCommand("go south");
 
-        assertEquals(String.format("You used the %s and now you can go to the south", keyName.toLowerCase()), useCommand);
+        assertEquals(String.format("You used the %s and now you can go south", keyName.toLowerCase()), useCommand);
         assertEquals(southBlockedByDoor.getMessage(), moveToBlockedDirection);
     }
-
 
 }
