@@ -11,8 +11,8 @@ public class Location {
     public static final String WIN_GAME_MSG = "Congratulations! You won!";
     public static final String LOSE_GAME_MSG = "Try again! You lost!";
 
-    public static final String ALREADY_WON = "You already won. Start a new game";
-    public static final String ALREADY_LOST = "You already won. Start a new game";
+    public static final String ALREADY_WON = "You already won. Start a new game.";
+    public static final String ALREADY_LOST = "You already won. Start a new game.";
 
     public enum LocationType {
         STANDARD, WINNING, LOSING
@@ -47,7 +47,7 @@ public class Location {
         return blockers == null ? "" : blockers.stream()
                 .filter(b -> b.blocksDirection(direction))
                 .map(Blocker::getDescription)
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(", "));
     }
 
     public String getName() {
@@ -65,14 +65,18 @@ public class Location {
         }
     }
 
+    public boolean isEndingLocation() {
+        return type == LocationType.WINNING || type == LocationType.LOSING;
+    }
+
     private String getNormalMessage() {
         String items = equipables.stream()
                 .map(Equipable::getName)
                 .collect(Collectors.joining(", "));
 
         return items.isEmpty()
-                ? String.format("Location: %s\nMessage: %s", name, message)
-                : String.format("Location: %s\nMessage: %s\nItems: %s", name, message, items);
+                ? String.format("Location: %s.\nMessage: %s", name, message)
+                : String.format("Location: %s.\nMessage: %s.\nItems: %s", name, message, items);
     }
 
     public void addEquipable(Equipable equipable) {
@@ -91,21 +95,21 @@ public class Location {
         String movementString = directionToLocationMap.entrySet().stream()
                 .map(entry -> {
                     if (canMoveTo(entry.getKey())) {
-                        return String.format("%s %s : Go to %s", goCommandText, entry.getKey(), entry.getValue());
+                        return String.format("%s %s : Go to %s.", goCommandText, entry.getKey(), entry.getValue());
                     } else {
                         String blockerMessage = getBlockersMessageTo(entry.getKey()).trim();
-                        return String.format("%s %s : Blocked by %s", goCommandText, entry.getKey(), blockerMessage);
+                        return String.format("%s %s : Blocked by %s.", goCommandText, entry.getKey(), blockerMessage);
                     }
                 }).collect(Collectors.joining("\n"));
 
         String useString = equipables.stream()
                 .filter(this::canUseEquipable)
-                .map(e -> String.format("%s %s : Use the equipable to unlock more options", useCommandText, e))
+                .map(e -> String.format("%s %s : Use the equipable to unlock more options.", useCommandText, e))
                 .collect(Collectors.joining("\n"));
 
         String pickupString = this.equipables == null ? "" :
                 this.equipables.stream()
-                        .map(e -> String.format("%s %s : Take the item to use it later", pickupCommandText, e.getName()))
+                        .map(e -> String.format("%s %s : Take the item to use it later.", pickupCommandText, e.getName()))
                         .collect(Collectors.joining("\n"));
 
         return String.format("%s\n%s\n%s", movementString, useString, pickupString).trim().replace("\n\n", "\n");
@@ -129,7 +133,7 @@ public class Location {
                 .filter(it -> !availableDirections.contains(it))
                 .collect(Collectors.joining(", "));
 
-        return String.format("You used the %s and now you can go %s", equipable, d);
+        return String.format("You used the %s and now you can go %s.", equipable, d);
     }
 
     private List<String> getAvailableDirections() {

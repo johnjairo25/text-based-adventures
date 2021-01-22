@@ -1,4 +1,4 @@
-package web.manager;
+package web.sms;
 
 import game.TextAdventuresGame;
 import game.builder.GameBuilder;
@@ -6,15 +6,14 @@ import game.builder.GameBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CachedGameManager {
+public class SmsGameManager {
 
-    private static final String WELCOME_MESSAGE = "Welcome to the Text Based Adventures World.";
     private static final String START_GAME_COMMAND = "start game";
 
     private final GameBuilder gameBuilder;
     private final Map<String, TextAdventuresGame> keyToGameMap;
 
-    public CachedGameManager(GameBuilder gameBuilder) {
+    public SmsGameManager(GameBuilder gameBuilder) {
         this.gameBuilder = gameBuilder;
         this.keyToGameMap = new HashMap<>();
     }
@@ -33,9 +32,7 @@ public class CachedGameManager {
         TextAdventuresGame game = createNewGame ? gameBuilder.build() : keyToGameMap.get(gameKey);
         keyToGameMap.put(gameKey, game);
 
-        return createNewGame ?
-                String.format("%s\n%s", WELCOME_MESSAGE, game.startGame())
-                : game.applyCommand(commandText);
+        return createNewGame ? game.getInitialMessageWithInstructions() : game.applyCommand(commandText);
     }
 
     private boolean isNullOrEmpty(String value) {

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import web.manager.CachedGameManager;
 
 import java.util.Map;
 
@@ -17,10 +16,10 @@ import java.util.Map;
 @RequestMapping("/sms")
 public class SmsController {
 
-    private final CachedGameManager gameManager;
+    private final SmsGameManager gameManager;
 
     @Autowired
-    public SmsController(CachedGameManager gameManager) {
+    public SmsController(SmsGameManager gameManager) {
         this.gameManager = gameManager;
     }
 

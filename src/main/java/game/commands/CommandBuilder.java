@@ -11,15 +11,15 @@ import java.util.regex.Pattern;
 public class CommandBuilder {
 
     private static final String COMMAND_INSTRUCTIONS = String.format(
-            "Available commands:\n%s\n%s\n%s\n%s\n%s\n%s",
+            "Available commands:\n%s.\n%s.\n%s.\n%s.\n%s.\n%s.",
             "go [direction]",
-            "(take|pickup) [item]",
-            "(use|open with|kill with|attack with) [item]",
+            "take [item]",
+            "use [item]",
             "drop [item]",
             "inventory",
             "directions");
 
-    private static final String INVALID_COMMAND_MESSAGE = "I did not understand that. If you need help, try the directions command";
+    private static final String INVALID_COMMAND_MESSAGE = "I did not understand that. Try a different command.";
     private static final String COMMAND_REGEX = "(?<command>\\S+( with)?)(\\s+(?<body>.+))?";
 
     protected static final String GO_COMMAND = "go";

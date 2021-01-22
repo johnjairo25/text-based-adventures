@@ -1,0 +1,4 @@
+logging.level:
+  ROOT: INFO
+  game: INFO
+  web.voice: DEBUG

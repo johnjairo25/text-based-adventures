@@ -11,18 +11,18 @@ import java.util.stream.Collectors;
 
 public class TextAdventuresGame {
 
-    protected static final String WELCOME_MSG = "Welcome to text-based adventures!";
+    protected static final String WELCOME_MSG = "Welcome to the text-based adventures game";
 
     protected static final String NO_NEXT_LOCATION_MSG = "You cannot go that way!";
 
-    protected static final String PICKUP_MSG = "You picked up the item %s";
-    protected static final String NOT_PICKUP_MSG = "You cannot pickup %s";
+    protected static final String PICKUP_MSG = "You picked up the item %s.";
+    protected static final String NOT_PICKUP_MSG = "You cannot pickup %s.";
 
-    protected static final String DROP_MSG = "You dropped the element(s): %s";
-    protected static final String NOT_DROP_MSG = "You don't have the element %s to drop";
+    protected static final String DROP_MSG = "You dropped the element(s): %s.";
+    protected static final String NOT_DROP_MSG = "You don't have the element %s to drop.";
 
-    protected static final String NOT_USE_MSG = "You don't have the %s in your inventory";
-    protected static final String NOT_USE_IN_LOCATION_MSG = "You cannot use this %s in the current location";
+    protected static final String NOT_USE_MSG = "You don't have the %s in your inventory.";
+    protected static final String NOT_USE_IN_LOCATION_MSG = "You cannot use this %s in the current location.";
 
     private Location currentLocation;
     private Set<Location> locations;
@@ -32,15 +32,19 @@ public class TextAdventuresGame {
     private final CommandBuilder commandBuilder;
 
 
-    public TextAdventuresGame(CommandBuilder commandBuilder) {
+    private TextAdventuresGame(CommandBuilder commandBuilder) {
         this.commandBuilder = commandBuilder;
     }
 
-    public String startGame() {
+    public String getInitialMessageWithInstructions() {
         return String.format("%s\n%s\n%s",
                 WELCOME_MSG,
                 commandBuilder.getCommandInstructions(),
                 currentLocation.getMessage());
+    }
+
+    public String initialMessage() {
+        return String.format("%s.\n%s", WELCOME_MSG, currentLocation.getMessage());
     }
 
     public String applyCommand(String commandText) {
@@ -49,6 +53,10 @@ public class TextAdventuresGame {
         }
         Command command = commandBuilder.buildCommand(commandText, this);
         return command.execute();
+    }
+
+    public boolean hasGameEnded() {
+        return currentLocation.isEndingLocation();
     }
 
     protected String goToDirection(String direction) {
@@ -99,7 +107,7 @@ public class TextAdventuresGame {
     protected String getInventory() {
 
         return equipables.stream()
-                .map(e -> String.format("%s : %s", e.getName(), e.getDescription()))
+                .map(e -> String.format("%s : %s.", e.getName(), e.getDescription()))
                 .collect(Collectors.joining("\n", "You are carrying:\n", "\n"));
     }
 

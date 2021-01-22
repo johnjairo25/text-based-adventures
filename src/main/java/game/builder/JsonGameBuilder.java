@@ -1,12 +1,12 @@
 package game.builder;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import game.TextAdventuresGame;
 import game.elements.Blocker;
 import game.elements.Equipable;
 import game.elements.Location;
 import game.elements.Location.LocationType;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -25,7 +25,8 @@ public class JsonGameBuilder implements GameBuilder {
 
     @Override
     public TextAdventuresGame build() {
-        return buildGameFromText(jsonText);
+        JSONObject json = new JSONObject(jsonText);
+        return buildGameFromText(json);
     }
 
     private String readInputText(InputStream inputStream) {
@@ -35,8 +36,7 @@ public class JsonGameBuilder implements GameBuilder {
                 .collect(Collectors.joining("\n"));
     }
 
-    private TextAdventuresGame buildGameFromText(String jsonText) {
-        JSONObject json = new JSONObject(jsonText);
+    protected TextAdventuresGame buildGameFromText(JSONObject json) {
 
         String initialLocation = safeGetString(json, "currentLocation");
         Set<Location> locations = buildLocations(safeGetArray(json, "locations"));
@@ -83,7 +83,7 @@ public class JsonGameBuilder implements GameBuilder {
         return json.has(equipables) ? json.getJSONArray(equipables) : new JSONArray();
     }
 
-    private String safeGetString(JSONObject json, String name) {
+    protected String safeGetString(JSONObject json, String name) {
         return json.has(name) ? json.getString(name) : "";
     }
 

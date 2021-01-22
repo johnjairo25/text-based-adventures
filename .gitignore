@@ -3,5 +3,8 @@
 target/
 *.iml
 
+# Local files
+tmp/
+
 # Mac files
 .DS_Store

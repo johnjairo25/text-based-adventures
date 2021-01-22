@@ -31,7 +31,7 @@ public class ConsoleMain {
     }
 
     private static void playGame(Scanner sc, TextAdventuresGame game) {
-        System.out.println(game.startGame());
+        System.out.println(game.getInitialMessageWithInstructions());
         while (true) {
             String command = sc.nextLine();
             String result = game.applyCommand(command);

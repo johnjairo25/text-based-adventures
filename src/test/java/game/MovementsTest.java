@@ -9,7 +9,7 @@ public class MovementsTest extends MapFixture {
 
     @Test
     public void startGameShowsInitialMessage() {
-        String result = game.startGame();
+        String result = game.getInitialMessageWithInstructions();
 
         assertTrue(result.contains(TextAdventuresGame.WELCOME_MSG));
         assertTrue(result.contains(initial.getMessage()));
@@ -71,7 +71,7 @@ public class MovementsTest extends MapFixture {
         String useCommand = game.applyCommand("use " + keyName);
         String moveToBlockedDirection = game.applyCommand("go south");
 
-        assertEquals(String.format("You used the %s and now you can go south", keyName.toLowerCase()), useCommand);
+        assertEquals(String.format("You used the %s and now you can go south.", keyName.toLowerCase()), useCommand);
         assertEquals(southBlockedByDoor.getMessage(), moveToBlockedDirection);
     }
 
