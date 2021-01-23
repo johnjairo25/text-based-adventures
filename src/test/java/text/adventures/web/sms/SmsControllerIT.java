@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class SmsControllerIT {
 
     private static final String PHONE_NUMBER = "+57111111111";
-    private static final String COMMAND_TEXT = "start text.adventures.game";
+    private static final String COMMAND_TEXT = "start game";
 
     @Autowired
     private MockMvc mvc;

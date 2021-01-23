@@ -42,7 +42,7 @@ public class SmsGameManagerTest {
 
     @Test
     public void canHandleOneGame() {
-        assertThat(gameManager.applyCommand("one", "start text.adventures.game"), containsStringIgnoringCase("Welcome"));
+        assertThat(gameManager.applyCommand("one", "start game"), containsStringIgnoringCase("Welcome"));
         assertThat(gameManager.applyCommand("one", "go south"), containsStringIgnoringCase("not go"));
         assertThat(gameManager.applyCommand("one", "go north"), containsStringIgnoringCase("north"));
         assertThat(gameManager.applyCommand("one", "go east"), containsStringIgnoringCase("east"));
@@ -62,8 +62,8 @@ public class SmsGameManagerTest {
 
     @Test
     public void canHandleTwoGamesAtTheSameTime() {
-        assertThat(gameManager.applyCommand("one", "start text.adventures.game"), containsStringIgnoringCase("Welcome"));
-        assertThat(gameManager.applyCommand("two", "start text.adventures.game"), containsStringIgnoringCase("Welcome"));
+        assertThat(gameManager.applyCommand("one", "start game"), containsStringIgnoringCase("Welcome"));
+        assertThat(gameManager.applyCommand("two", "start game"), containsStringIgnoringCase("Welcome"));
 
         assertThat(gameManager.applyCommand("one", "go south"), containsStringIgnoringCase("not go"));
         assertThat(gameManager.applyCommand("two", "go south"), containsStringIgnoringCase("not go"));

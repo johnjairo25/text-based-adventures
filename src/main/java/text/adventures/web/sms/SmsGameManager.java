@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class SmsGameManager {
 
-    private static final String START_GAME_COMMAND = "start text.adventures.game";
+    private static final String START_GAME_COMMAND = "start game";
 
     private final GameBuilder gameBuilder;
     private final Cache<String, TextAdventuresGame> keyToGameMap;

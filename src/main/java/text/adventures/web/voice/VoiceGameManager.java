@@ -78,7 +78,7 @@ public class VoiceGameManager {
 
         if (previousOptions == null) {
             throw new GameNotStartedException(
-                    String.format("There's no text.adventures.game started for the key [%s]. The request cannot be processed", gameKey));
+                    String.format("There's no game started for the key [%s]. The request cannot be processed", gameKey));
         }
     }
 
