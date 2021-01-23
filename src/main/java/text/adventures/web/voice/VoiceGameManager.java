@@ -1,9 +1,12 @@
 package text.adventures.web.voice;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import text.adventures.game.TextAdventuresGame;
 import text.adventures.game.builder.GameBuilder;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 public class VoiceGameManager {
@@ -11,13 +14,19 @@ public class VoiceGameManager {
     private static final String AVAILABLE_OPTIONS = "Available moves: ";
 
     private final GameBuilder gameBuilder;
-    private final Map<String, TextAdventuresGame> keyToGameMap;
-    private final Map<String, UserSelectionOptions> keyToOptionsMap;
+    private final Cache<String, TextAdventuresGame> keyToGameMap;
+    private final Cache<String, UserSelectionOptions> keyToOptionsMap;
 
     public VoiceGameManager(GameBuilder gameBuilder) {
         this.gameBuilder = gameBuilder;
-        this.keyToGameMap = new HashMap<>();
-        this.keyToOptionsMap = new HashMap<>();
+        this.keyToGameMap = Caffeine.newBuilder()
+                .expireAfterWrite(20, TimeUnit.MINUTES)
+                .maximumSize(1_000)
+                .build();
+        this.keyToOptionsMap = Caffeine.newBuilder()
+                .expireAfterWrite(20, TimeUnit.MINUTES)
+                .maximumSize(1_000)
+                .build();
     }
 
     public String startGame(String gameKey) {
@@ -36,8 +45,8 @@ public class VoiceGameManager {
     public CommandResult applyCommand(String gameKey, int selectedOption) {
 
         validateGameKey(gameKey);
-        TextAdventuresGame game = getOrCreateGame(gameKey);
-        UserSelectionOptions previousOptions = keyToOptionsMap.get(gameKey);
+        TextAdventuresGame game = keyToGameMap.get(gameKey, s -> gameBuilder.build());
+        UserSelectionOptions previousOptions = keyToOptionsMap.get(gameKey, s -> null);
         validatePreviousOptionExists(gameKey, previousOptions);
 
         UserOption chosenOption = previousOptions.getOption(selectedOption);
@@ -71,16 +80,6 @@ public class VoiceGameManager {
             throw new GameNotStartedException(
                     String.format("There's no text.adventures.game started for the key [%s]. The request cannot be processed", gameKey));
         }
-    }
-
-    private TextAdventuresGame getOrCreateGame(String gameKey) {
-
-        TextAdventuresGame game = this.keyToGameMap.containsKey(gameKey) ?
-                this.keyToGameMap.get(gameKey)
-                : gameBuilder.build();
-        keyToGameMap.put(gameKey, game);
-
-        return game;
     }
 
     public static class CommandResult {
