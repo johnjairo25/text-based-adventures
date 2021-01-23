@@ -11,8 +11,8 @@ public class Location {
     public static final String WIN_GAME_MSG = "Congratulations! You won!";
     public static final String LOSE_GAME_MSG = "Try again! You lost!";
 
-    public static final String ALREADY_WON = "You already won. Start a new text.adventures.game.";
-    public static final String ALREADY_LOST = "You already won. Start a new text.adventures.game.";
+    public static final String ALREADY_WON = "You already won. Start a new game.";
+    public static final String ALREADY_LOST = "You already won. Start a new game.";
 
     public enum LocationType {
         STANDARD, WINNING, LOSING

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 public class TextAdventuresGame {
 
-    protected static final String WELCOME_MSG = "Welcome to the text-based adventures text.adventures.game";
+    protected static final String WELCOME_MSG = "Welcome to the text-based adventures game";
 
     protected static final String NO_NEXT_LOCATION_MSG = "You cannot go that way!";
 

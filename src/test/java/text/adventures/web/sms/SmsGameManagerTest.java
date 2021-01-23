@@ -18,7 +18,7 @@ public class SmsGameManagerTest {
         gameManager = new SmsGameManager(new StaticGameBuilder());
     }
 
-    // empty text.adventures.game key should return an exception
+    // empty game key should return an exception
     @Test
     public void emptyGameKeyShouldReturnException() {
         assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand("", "go north"));
