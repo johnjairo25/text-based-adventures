@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = WebApplication.class)
 public class SmsControllerIT {
 
-    private static final String PHONE_NUMBER = "+573168904747";
+    private static final String PHONE_NUMBER = "+57111111111";
     private static final String COMMAND_TEXT = "start text.adventures.game";
 
     @Autowired
@@ -41,10 +41,10 @@ public class SmsControllerIT {
                 .param("Body", COMMAND_TEXT))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_XML))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("Response")))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("Message")))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("Body")))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("Welcome")));
+                .andExpect(content().string(containsString("Response")))
+                .andExpect(content().string(containsString("Message")))
+                .andExpect(content().string(containsString("Body")))
+                .andExpect(content().string(containsString("Welcome")));
     }
 
 

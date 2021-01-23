@@ -33,8 +33,9 @@ public class VoiceGameManager {
         return String.format("%s.\n%s.", game.initialMessage(), options.niceVoiceOptions());
     }
 
-    public String applyCommand(String gameKey, int selectedOption) {
+    public CommandResult applyCommand(String gameKey, int selectedOption) {
 
+        validateGameKey(gameKey);
         TextAdventuresGame game = getOrCreateGame(gameKey);
         UserSelectionOptions previousOptions = keyToOptionsMap.get(gameKey);
         validatePreviousOptionExists(gameKey, previousOptions);
@@ -45,22 +46,23 @@ public class VoiceGameManager {
 
         if (game.hasGameEnded()) {
 
-            return commandResult;
+            return new CommandResult(commandResult, true);
         } else {
             String directions = game.applyCommand("directions");
 
             UserSelectionOptions nextOptions = UserSelectionOptions.buildOptions(directions);
             keyToOptionsMap.put(gameKey, nextOptions);
 
-            return String.format("%s.\n%s\n%s.", commandResult, AVAILABLE_OPTIONS, nextOptions.niceVoiceOptions())
+            String finalResult = String.format("%s.\n%s\n%s.", commandResult, AVAILABLE_OPTIONS, nextOptions.niceVoiceOptions())
                     .replace("..", ".");
+            return new CommandResult(finalResult, false);
         }
     }
 
-    public boolean hasGameEnded(String gameKey) {
-
-        TextAdventuresGame game = getOrCreateGame(gameKey);
-        return game.hasGameEnded();
+    private void validateGameKey(String gameKey) {
+        if (gameKey == null || gameKey.isEmpty()) {
+            throw new IllegalArgumentException("The gameKey must not be null");
+        }
     }
 
     private void validatePreviousOptionExists(String gameKey, UserSelectionOptions previousOptions) {
@@ -81,13 +83,31 @@ public class VoiceGameManager {
         return game;
     }
 
-    static class GameNotStartedException extends RuntimeException {
+    public static class CommandResult {
+        private final String result;
+        private final boolean ended;
+
+        public CommandResult(String result, boolean ended) {
+            this.result = result;
+            this.ended = ended;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public boolean isEnded() {
+            return ended;
+        }
+    }
+
+    protected static class GameNotStartedException extends RuntimeException {
         public GameNotStartedException(String message) {
             super(message);
         }
     }
 
-    static class UserSelectionOptions {
+    protected static class UserSelectionOptions {
 
         private static final UserOption DEFAULT_OPTION = new UserOption(9, "invalid");
         private final List<UserOption> options;

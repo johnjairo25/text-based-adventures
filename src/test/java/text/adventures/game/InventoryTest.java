@@ -2,10 +2,28 @@ package text.adventures.game;
 
 import org.junit.jupiter.api.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsStringIgnoringCase;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class InventoryTest extends MapFixture {
+
+    @Test
+    public void cannotTakeNonExistentEquipable() {
+        String result = game.applyCommand("take nothing");
+
+        assertThat(result, containsStringIgnoringCase("you cannot pickup"));
+        assertThat(result, containsStringIgnoringCase("nothing"));
+    }
+
+    @Test
+    public void cannotDropNotTakenEquipable() {
+        String result = game.applyCommand("drop nothing");
+
+        assertThat(result, containsStringIgnoringCase("You don't have the element"));
+        assertThat(result, containsStringIgnoringCase("nothing"));
+    }
 
     @Test
     public void canPickupEquipable() {

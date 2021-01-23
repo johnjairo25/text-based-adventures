@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import text.adventures.web.voice.VoiceGameManager.CommandResult;
 
 import java.util.Map;
 
@@ -54,11 +55,12 @@ public class VoiceController {
         LOGGER.debug("Endpoint: [{}], Request: [{}]", "play", request);
 
         int chosenOption = parseInt(request.getDigits());
-        String commandResponse = gameManager.applyCommand(getGameKey(request), chosenOption);
-        LOGGER.trace("Endpoint: [{}], CommandResponse: [{}]", "play", commandResponse);
+        CommandResult commandResult = gameManager.applyCommand(getGameKey(request), chosenOption);
+        LOGGER.trace("Endpoint: [{}], CommandResponse: [{}]", "play", commandResult);
 
-        return gameManager.hasGameEnded(getGameKey(request)) ? endWithMessage(commandResponse)
-                : gatherWithMessage(commandResponse);
+        return commandResult.isEnded()
+                ? endWithMessage(commandResult.getResult())
+                : gatherWithMessage(commandResult.getResult());
     }
 
     private int parseInt(String value) {
