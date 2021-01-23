@@ -1,1 +1,1 @@
-web: java -jar -Dserver.port=$PORT target/text-adventures-sms-1.0-SNAPSHOT.jar
+text.adventures.game.web: java -jar -Dserver.port=$PORT target/text-adventures-sms-1.0-SNAPSHOT.jar

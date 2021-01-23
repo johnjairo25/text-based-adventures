@@ -23,7 +23,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>${spring.boot.version}</version>
                 <configuration>
-                    <mainClass>web.application.WebApplication</mainClass>
+                    <mainClass>text.adventures.web.application.WebApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>
@@ -61,7 +61,7 @@
         <!-- Web Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-text.adventures.game.web</artifactId>
             <version>${spring.boot.version}</version>
         </dependency>
         <dependency>
