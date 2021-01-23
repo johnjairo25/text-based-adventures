@@ -1,5 +1,6 @@
 # Text Based Adventures
 
-An implementation of a type of Text Based Adventures games.
+An implementation of a text based game inspired by the 80's famous [Zork](https://en.wikipedia.org/wiki/Zork).
 
-It provides options to play the game either locally (console) or via SMS using Twilio's Webhooks for SMS.
+It adds endpoints that can easily be plugged to the webhook of a [Twilio's](https://www.twilio.com/) phone, 
+allowing you to play by sending SMS or by doing phone calls.
