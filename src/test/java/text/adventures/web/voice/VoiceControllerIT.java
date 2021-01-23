@@ -1,15 +1,13 @@
 package text.adventures.web.voice;
 
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import text.adventures.web.application.WebApplication;
 
 import static org.hamcrest.Matchers.containsString;
@@ -79,6 +77,10 @@ public class VoiceControllerIT {
                 .andExpect(content().string(containsString("Response")))
                 .andExpect(content().string(containsString("Say")))
                 .andExpect(content().string(containsString("Hangup")));
+    }
+
+    @SpringBootApplication(scanBasePackages = "text.adventures.web.voice")
+    static class Configuration {
     }
 
 }

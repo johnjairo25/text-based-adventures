@@ -1,8 +1,6 @@
 package text.adventures.web.voice;
 
-import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import text.adventures.game.builder.StaticGameBuilder;
@@ -25,23 +23,17 @@ public class VoiceGameManagerTest {
 
     @Test
     public void nullGameKeyShouldReturnException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gameManager.applyCommand(null, 1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand(null, 1));
     }
 
     @Test
     public void emptyGameKeyShouldReturnException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gameManager.applyCommand("", 1);
-        });
+        assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand("", 1));
     }
 
     @Test
     public void notStartedExceptionIfGameHasNotStarted() {
-        assertThrows(GameNotStartedException.class, () -> {
-            gameManager.applyCommand("key", 1);
-        });
+        assertThrows(GameNotStartedException.class, () -> gameManager.applyCommand("key", 1));
     }
 
     @Test

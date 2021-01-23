@@ -21,24 +21,18 @@ public class SmsGameManagerTest {
     // empty text.adventures.game key should return an exception
     @Test
     public void emptyGameKeyShouldReturnException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gameManager.applyCommand("", "go north");
-        });
+        assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand("", "go north"));
     }
 
     @Test
     public void nullGameKeyShouldReturnException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gameManager.applyCommand(null, "go north");
-        });
+        assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand(null, "go north"));
     }
 
     // null command text should return an exception
     @Test
     public void nullCommandShouldReturnException() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            gameManager.applyCommand("one", null);
-        });
+        assertThrows(IllegalArgumentException.class, () -> gameManager.applyCommand("one", null));
     }
 
     @Test

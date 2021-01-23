@@ -2,14 +2,11 @@ package text.adventures.web.sms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import text.adventures.web.application.WebApplication;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
@@ -17,8 +14,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@AutoConfigureMockMvc
-@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT, classes = WebApplication.class)
+@WebMvcTest(controllers = SmsController.class)
 public class SmsControllerIT {
 
     private static final String PHONE_NUMBER = "+57111111111";
@@ -45,6 +41,10 @@ public class SmsControllerIT {
                 .andExpect(content().string(containsString("Message")))
                 .andExpect(content().string(containsString("Body")))
                 .andExpect(content().string(containsString("Welcome")));
+    }
+
+    @SpringBootApplication(scanBasePackages = "text.adventures.web.sms")
+    static class Configuration {
     }
 
 
