@@ -22,7 +22,7 @@ public class SmsGameManager {
         if (isNullOrEmpty(gameKey)) {
             throw new IllegalArgumentException("gameKey must not be null or empty");
         }
-        if (isNullOrEmpty(commandText)) {
+        if (commandText == null) {
             throw new IllegalArgumentException("gameKey must not be null or empty");
         }
 

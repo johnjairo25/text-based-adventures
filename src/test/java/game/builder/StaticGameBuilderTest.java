@@ -3,9 +3,6 @@ package game.builder;
 import game.TextAdventuresGame;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import web.application.WebApplication;
-
-import java.io.InputStream;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsStringIgnoringCase;
@@ -41,12 +38,6 @@ public class StaticGameBuilderTest {
         assertThat(game.applyCommand("go east"), containsStringIgnoringCase("not go"));
         assertThat(game.applyCommand("use " + StaticGameBuilder.SWORD_NAME), containsStringIgnoringCase("east"));
         assertThat(game.applyCommand("go east"), containsStringIgnoringCase("congratulations"));
-    }
-
-    private InputStream readFromResources() {
-        return WebApplication.class
-                .getClassLoader()
-                .getResourceAsStream("basicGame.json");
     }
 
 }

@@ -12,11 +12,11 @@ import static java.util.Collections.singletonList;
 
 public class StaticGameBuilder implements GameBuilder {
 
-    protected static final String KEY_NAME = "keyInNorthEast";
+    public static final String KEY_NAME = "keyInNorthEast";
     protected static final Equipable keyEquipable =
             new Equipable(KEY_NAME, "Some description for the key");
 
-    protected static final String SWORD_NAME = "swordName";
+    public static final String SWORD_NAME = "swordName";
     protected static final Equipable swordEquipable =
             new Equipable(SWORD_NAME, "some sword description");
 
