@@ -1,12 +1,38 @@
 package game.commands;
 
+import game.CommandImpl;
+import game.CommandImpl.NullCommand;
 import org.junit.jupiter.api.Test;
 import game.commands.CommandBuilder.CommandParts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.hamcrest.MatcherAssert.*;
+import static org.hamcrest.Matchers.*;
 import static game.commands.CommandBuilder.getCommandAndBody;
 
 public class CommandBuilderTest {
+
+    @Test
+    public void testEmptyCommandIsInvalid() {
+        CommandBuilder commandBuilder = new CommandBuilder();
+
+        Command command = commandBuilder.buildCommand("", null);
+
+        assertThat(command, instanceOf(NullCommand.class));
+        NullCommand nullCommand = (NullCommand) command;
+        assertThat(nullCommand.execute(), is(CommandBuilder.INVALID_COMMAND_MESSAGE));
+    }
+
+    @Test
+    public void testInvalidCommandIsInvalid() {
+        CommandBuilder commandBuilder = new CommandBuilder();
+
+        Command command = commandBuilder.buildCommand("invalid command", null);
+
+        assertThat(command, instanceOf(NullCommand.class));
+        NullCommand nullCommand = (NullCommand) command;
+        assertThat(nullCommand.execute(), is(CommandBuilder.INVALID_COMMAND_MESSAGE));
+    }
 
     @Test
     public void goToCommand() {

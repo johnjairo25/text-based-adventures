@@ -4,6 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import game.elements.Location;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class WinAndLoseTest extends MapFixture {
 
     @Test
@@ -12,7 +15,8 @@ public class WinAndLoseTest extends MapFixture {
 
         String result = game.applyCommand("go east");
 
-        Assertions.assertEquals(Location.WIN_GAME_MSG, result);
+        assertEquals(Location.WIN_GAME_MSG, result);
+        assertTrue(game.hasGameEnded());
     }
 
     @Test
@@ -22,7 +26,8 @@ public class WinAndLoseTest extends MapFixture {
 
         String result = game.applyCommand("go west");
 
-        Assertions.assertEquals(Location.ALREADY_WON, result);
+        assertEquals(Location.ALREADY_WON, result);
+        assertTrue(game.hasGameEnded());
     }
 
     @Test
@@ -31,7 +36,8 @@ public class WinAndLoseTest extends MapFixture {
 
         String result = game.applyCommand("go west");
 
-        Assertions.assertEquals(Location.LOSE_GAME_MSG, result);
+        assertEquals(Location.LOSE_GAME_MSG, result);
+        assertTrue(game.hasGameEnded());
     }
 
     @Test
@@ -41,7 +47,8 @@ public class WinAndLoseTest extends MapFixture {
 
         String result = game.applyCommand("go west");
 
-        Assertions.assertEquals(Location.ALREADY_LOST, result);
+        assertEquals(Location.ALREADY_LOST, result);
+        assertTrue(game.hasGameEnded());
     }
 
 

@@ -12,13 +12,13 @@ import static java.util.Collections.singletonList;
 
 public class StaticGameBuilder implements GameBuilder {
 
-    protected static final String keyName = "keyInNorthEast";
+    protected static final String KEY_NAME = "keyInNorthEast";
     protected static final Equipable keyEquipable =
-            new Equipable(keyName, "Some description for the key");
+            new Equipable(KEY_NAME, "Some description for the key");
 
-    protected static final String swordName = "swordName";
+    protected static final String SWORD_NAME = "swordName";
     protected static final Equipable swordEquipable =
-            new Equipable(swordName, "some sword description");
+            new Equipable(SWORD_NAME, "some sword description");
 
     protected Blocker southBlocker;
     protected Blocker tigerBlocker;
@@ -37,12 +37,12 @@ public class StaticGameBuilder implements GameBuilder {
     public TextAdventuresGame build() {
         southBlocker = Blocker.Builder.aBlocker()
                 .withDescription("Lock")
-                .withUnblocksWithEquipable(keyName) // unblocks with key in northEast
+                .withUnblocksWithEquipable(KEY_NAME) // unblocks with key in northEast
                 .withBlockedDirections(new ArrayList<>(singletonList("south")))
                 .build();
         tigerBlocker = Blocker.Builder.aBlocker()
                 .withDescription("Tiger")
-                .withUnblocksWithEquipable(swordName)
+                .withUnblocksWithEquipable(SWORD_NAME)
                 .withBlockedDirections(new ArrayList<>(asList("east", "west")))
                 .build();
 

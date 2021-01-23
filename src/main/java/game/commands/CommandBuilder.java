@@ -19,7 +19,7 @@ public class CommandBuilder {
             "inventory",
             "directions");
 
-    private static final String INVALID_COMMAND_MESSAGE = "I did not understand that. Try a different command.";
+    protected static final String INVALID_COMMAND_MESSAGE = "I did not understand that. Try a different command.";
     private static final String COMMAND_REGEX = "(?<command>\\S+( with)?)(\\s+(?<body>.+))?";
 
     protected static final String GO_COMMAND = "go";
