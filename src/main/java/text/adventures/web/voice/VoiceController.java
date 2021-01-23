@@ -21,7 +21,7 @@ import java.util.Map;
 public class VoiceController {
 
     private static final  int DEFAULT_SELECTION = 9;
-    private static final String PLAY_ACTION = "/voice-text.adventures.game/play";
+    private static final String PLAY_ACTION = "/voice-game/play";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(VoiceController.class);
 
