@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class VoiceWebhookRequestTest {
 
     @Test
-    public void canBuildObjectCorrectly() {
+    public void canHandleTestRequest() {
         Map<String, String> input = new HashMap<>();
         input.put("From", "from");
         input.put("Digits", "1");
@@ -19,7 +19,38 @@ public class VoiceWebhookRequestTest {
         VoiceWebhookRequest request = VoiceWebhookRequest.buildFrom(input);
 
         assertNotNull(request);
-        assertEquals("from", request.getFrom());
+        assertEquals("from", request.getExternal());
+        assertEquals("1", request.getDigits());
+    }
+
+
+    @Test
+    public void canHandleInboundRequest() {
+        Map<String, String> input = new HashMap<>();
+        input.put("Direction", "inbound");
+        input.put("From", "from");
+        input.put("To", "to");
+        input.put("Digits", "1");
+
+        VoiceWebhookRequest request = VoiceWebhookRequest.buildFrom(input);
+
+        assertNotNull(request);
+        assertEquals("from", request.getExternal());
+        assertEquals("1", request.getDigits());
+    }
+
+    @Test
+    public void canHandleOutboundRequest() {
+        Map<String, String> input = new HashMap<>();
+        input.put("Direction", "outbound-api");
+        input.put("To", "to");
+        input.put("From", "from");
+        input.put("Digits", "1");
+
+        VoiceWebhookRequest request = VoiceWebhookRequest.buildFrom(input);
+
+        assertNotNull(request);
+        assertEquals("to", request.getExternal());
         assertEquals("1", request.getDigits());
     }
 

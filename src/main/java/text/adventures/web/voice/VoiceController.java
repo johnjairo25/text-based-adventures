@@ -74,7 +74,7 @@ public class VoiceController {
 
 
     private String getGameKey(VoiceWebhookRequest request) {
-        return "VOICE" + request.getFrom();
+        return "VOICE" + request.getExternal();
     }
 
     private String gatherWithMessage(String prompt) {
