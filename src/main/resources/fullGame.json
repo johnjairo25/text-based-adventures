@@ -1,0 +1,285 @@
+{
+  "currentLocation": "west of cage",
+  "locations": [
+    {
+      "name": "west of cage",
+      "message": "You are in an open field west of an open cage",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "open cage"
+        },
+        {
+          "direction": "north",
+          "location": "key room"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "open cage",
+      "message": "You are inside an open cage. There's nothing interesting here. To the north you see a room that may look interesting",
+      "directionToLocationMap": [
+        {
+          "direction": "north",
+          "location": "north of cage"
+        },
+        {
+          "direction": "west",
+          "location": "west of cage"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "north of cage",
+      "message": "You are in the north of an open cage. To the north you see a room with a useful ladder that you could take.",
+      "directionToLocationMap": [
+        {
+          "direction": "north",
+          "location": "ladder room"
+        },
+        {
+          "direction": "south",
+          "location": "open cage"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "ladder room",
+      "message": "There is a ladder here. You can take it and add it to your inventory.",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "clearing"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "ladder",
+          "description": "Use this ladder to climb down from a canyon"
+        }
+      ]
+    },
+    {
+      "name": "clearing",
+      "message": "You are in a clearing with forest to the south",
+      "directionToLocationMap": [
+        {
+          "direction": "south",
+          "location": "forest"
+        },
+        {
+          "direction": "north",
+          "location": "ladder room"
+        },
+        {
+          "direction": "west",
+          "location": "north of cage"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "forest",
+      "message": "You are in a forest, with large trees all around you. There's a sword here. The forest continues to the south.",
+      "directionToLocationMap": [
+        {
+          "direction": "south",
+          "location": "forest 2"
+        },
+        {
+          "direction": "north",
+          "location": "clearing"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "infinity sword",
+          "description": "This sword can be used to kill dangerous animals"
+        }
+      ]
+    },
+    {
+      "name": "forest 2",
+      "message": "You are in a forest, with large trees (smaller than before though). To the south there's a canyon.",
+      "directionToLocationMap": [
+        {
+          "direction": "south",
+          "location": "canyon view"
+        },
+        {
+          "direction": "north",
+          "location": "forest"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "canyon view",
+      "message": "You are in a canyon. A ladder can help you go down to a dragon dungeon.",
+      "directionToLocationMap": [
+        {
+          "direction": "down",
+          "location": "dragon dungeon"
+        },
+        {
+          "direction": "north",
+          "location": "forest 2"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "canyon",
+          "unblocksWith": "ladder",
+          "blockedDirections": ["down"]
+        }
+      ],
+      "equipables": []
+    },
+    {
+      "name": "dragon dungeon",
+      "message": "There's a dragon in here that blocks your path to the north. Use your sword if you have it.",
+      "directionToLocationMap": [
+        {
+          "direction": "north",
+          "location": "baby dragon"
+        },
+        {
+          "direction": "up",
+          "location": "canyon view"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "dragon",
+          "unblocksWith": "infinity sword",
+          "blockedDirections": ["north"]
+        }
+      ],
+      "equipables": []
+    },
+    {
+      "name": "baby dragon",
+      "message": "You are in the room where the dragon kept its baby.",
+      "directionToLocationMap": [
+        {
+          "direction": "west",
+          "location": "passage"
+        },
+        {
+          "direction": "north",
+          "location": "west of cage"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "baby dragon",
+          "description": "A small dragon that can dry as much water as you need"
+        }
+      ]
+    },
+    {
+      "name": "passage",
+      "message": "You are in a passage. To the west you see a room where something important may appear. The south seems like a wet place. The east may have something you need.",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "baby dragon"
+        },
+        {
+          "direction": "south",
+          "location": "fire hydrant"
+        },
+        {
+          "direction": "west",
+          "location": "key room"
+        }
+      ],
+      "blockers": [],
+      "equipables": []
+    },
+    {
+      "name": "key room",
+      "message": "You are in a room with a table in the center. The center has a bright key in the middle.",
+      "directionToLocationMap": [
+        {
+          "direction": "east",
+          "location": "passage"
+        },
+        {
+          "direction": "west",
+          "location": "ladder room"
+        }
+      ],
+      "blockers": [],
+      "equipables": [
+        {
+          "name": "key",
+          "description": "It may be your only option to win this puzzle"
+        }
+      ]
+    },
+    {
+      "name": "fire hydrant",
+      "message": "An opened fire hydrant is blocking your way to the exit room.",
+      "directionToLocationMap": [
+        {
+          "direction": "west",
+          "location": "exit room"
+        },
+        {
+          "direction": "north",
+          "location": "passage"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "fire hydrant",
+          "unblocksWith": "baby dragon",
+          "blockedDirections": ["west"]
+        }
+      ],
+      "equipables": []
+    },
+    {
+      "name": "exit room",
+      "message": "You are in the exit room. Do you have the key to win this?",
+      "directionToLocationMap": [
+        {
+          "direction": "west",
+          "location": "end"
+        },
+        {
+          "direction": "east",
+          "location": "fire hydrant"
+        }
+      ],
+      "blockers": [
+        {
+          "description": "lock",
+          "unblocksWith": "key",
+          "blockedDirections": ["west"]
+        }
+      ],
+      "equipables": []
+    },
+    {
+      "name": "end",
+      "message": "You won. Thanks for playing text adventure games.",
+      "type": "winning",
+      "directionToLocationMap": [],
+      "blockers": [],
+      "equipables": []
+    }
+  ]
+}

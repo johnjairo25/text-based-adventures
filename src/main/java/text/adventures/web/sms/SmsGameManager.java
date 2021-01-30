@@ -33,8 +33,11 @@ public class SmsGameManager {
         boolean createNewGame = START_GAME_COMMAND.equalsIgnoreCase(commandText.trim())
                 || keyToGameMap.getIfPresent(gameKey) == null;
 
+        if (createNewGame) {
+            keyToGameMap.put(gameKey, gameBuilder.build());
+        }
+
         TextAdventuresGame game = keyToGameMap.get(gameKey, a -> gameBuilder.build());
-        keyToGameMap.put(gameKey, game);
 
         return createNewGame ? game.getInitialMessageWithInstructions() : game.applyCommand(commandText);
     }

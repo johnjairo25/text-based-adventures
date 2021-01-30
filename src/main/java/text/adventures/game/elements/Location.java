@@ -75,8 +75,8 @@ public class Location {
                 .collect(Collectors.joining(", "));
 
         return items.isEmpty()
-                ? String.format("Location: %s.\nMessage: %s", name, message)
-                : String.format("Location: %s.\nMessage: %s.\nItems: %s", name, message, items);
+                ? String.format("Location: %s.\nMessage: %s", name, message).replace("..", ".")
+                : String.format("Location: %s.\nMessage: %s.\nItems: %s", name, message, items).replace("..", ".");
     }
 
     public void addEquipable(Equipable equipable) {

@@ -12,7 +12,7 @@ import java.io.InputStream;
 @Configuration
 public class GameConfiguration {
 
-    private static final String GAME_FILENAME = "basicGame.json";
+    private static final String GAME_FILENAME = "fullGame.json";
 
     @Bean
     public GameBuilder gameBuilder() {

@@ -1,0 +1,23 @@
+{
+  "name": "",
+  "message": "",
+  "directionToLocationMap": [
+    {
+      "direction": "",
+      "location": ""
+    }
+  ],
+  "blockers": [
+    {
+      "description": "",
+      "unblocksWith": "",
+      "blockedDirections": [""]
+    }
+  ],
+  "equipables": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ]
+}
