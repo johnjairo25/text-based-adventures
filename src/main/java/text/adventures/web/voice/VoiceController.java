@@ -83,6 +83,7 @@ public class VoiceController {
                 .say(new Say.Builder(prompt).build())
                 .action(VoiceController.PLAY_ACTION)
                 .numDigits(1)
+                .timeout(20)
                 .inputs(Gather.Input.DTMF)
                 .build();
         VoiceResponse response = new VoiceResponse.Builder()
