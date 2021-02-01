@@ -2,3 +2,5 @@ logging.level:
   ROOT: INFO
   game: INFO
   web.voice: DEBUG
+
+spring.banner.location: banner.txt
